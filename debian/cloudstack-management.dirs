@@ -1,0 +1,10 @@
+etc/cloudstack/server
+etc/cloudstack/management
+usr/share/cloudstack-management/webapps/client
+usr/share/cloudstack-management/setup
+var/cache/cloudstack/management/work
+var/cache/cloudstack/management/temp
+var/log/cloudstack/management
+var/log/cloudstack/ipallocator
+var/lib/cloudstack/management
+var/lib/cloudstack/mnt

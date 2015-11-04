@@ -1,0 +1,3 @@
+etc/cloudstack/usage
+var/log/cloudstack/usage
+usr/share/cloudstack-usage/plugins

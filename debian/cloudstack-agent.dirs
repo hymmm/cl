@@ -1,0 +1,3 @@
+etc/cloudstack/agent
+etc/var/log/cloudstack/agent
+usr/share/cloudstack-agent/plugins

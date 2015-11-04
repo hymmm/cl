@@ -19,21 +19,7 @@ override_dh_auto_build:
 	     ${ACS_BUILD_OPTS}
 
 override_dh_auto_install:
-	# Common packages
-	mkdir -p $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE) \
-	         $(DESTDIR)/$(SYSCONFDIR)/init.d \
-	         $(DESTDIR)/var/cache/$(PACKAGE) \
-	         $(DESTDIR)/var/log/$(PACKAGE) \
-	         $(DESTDIR)/var/lib/$(PACKAGE) \
-	         $(DESTDIR)/usr/bin \
-	         $(DESTDIR)/usr/share
-
 	# cloudstack-agent
-	mkdir $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/agent \
-	      $(DESTDIR)/$(SYSCONFDIR)/profile.d \
-	      $(DESTDIR)/var/log/$(PACKAGE)/agent \
-	      $(DESTDIR)/usr/share/$(PACKAGE)-agent \
-	      $(DESTDIR)/usr/share/$(PACKAGE)-agent/plugins
 	install -D agent/target/cloud-agent-$(VERSION).jar $(DESTDIR)/usr/share/$(PACKAGE)-agent/lib/$(PACKAGE)-agent.jar
 	install -D plugins/hypervisors/kvm/target/cloud-plugin-hypervisor-kvm-$(VERSION).jar $(DESTDIR)/usr/share/$(PACKAGE)-agent/lib/
 	install -D plugins/hypervisors/kvm/target/dependencies/* $(DESTDIR)/usr/share/$(PACKAGE)-agent/lib/
@@ -47,20 +33,6 @@ override_dh_auto_install:
 	install -D agent/target/transformed/* $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/agent
 
 	# cloudstack-management
-	mkdir -p $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/server \
-	         $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/management \
-	         $(DESTDIR)/$(SYSCONFDIR)/security/limits.d/ \
-	         $(DESTDIR)/$(SYSCONFDIR)/sudoers.d/ \
-	         $(DESTDIR)/usr/share/$(PACKAGE)-management \
-	         $(DESTDIR)/usr/share/$(PACKAGE)-management/webapps/client \
-	         $(DESTDIR)/usr/share/$(PACKAGE)-management/setup \
-	         $(DESTDIR)/var/log/$(PACKAGE)/management \
-	         $(DESTDIR)/var/cache/$(PACKAGE)/management \
-	         $(DESTDIR)/var/cache/$(PACKAGE)/management/work \
-	         $(DESTDIR)/var/cache/$(PACKAGE)/management/temp \
-	         $(DESTDIR)/var/log/$(PACKAGE)/ipallocator \
-	         $(DESTDIR)/var/lib/$(PACKAGE)/management \
-	         $(DESTDIR)/var/lib/$(PACKAGE)/mnt
 	cp -r client/target/utilities/scripts/db/* $(DESTDIR)/usr/share/$(PACKAGE)-management/setup/
 	cp -r client/target/cloud-client-ui-$(VERSION)/* $(DESTDIR)/usr/share/$(PACKAGE)-management/webapps/client/
 	cp server/target/conf/* $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/server/
@@ -86,10 +58,6 @@ override_dh_auto_install:
 	ln -s ../../../var/cache/$(PACKAGE)/management/work $(DESTDIR)/usr/share/$(PACKAGE)-management/work
 
 	# cloudstack-common
-	mkdir -p $(DESTDIR)/usr/share/$(PACKAGE)-common
-	mkdir $(DESTDIR)/usr/share/$(PACKAGE)-common/scripts
-	mkdir $(DESTDIR)/usr/share/$(PACKAGE)-common/setup
-	mkdir $(DESTDIR)/usr/share/$(PACKAGE)-common/lib
 	cp -r scripts/installer $(DESTDIR)/usr/share/$(PACKAGE)-common/scripts
 	cp -r scripts/network $(DESTDIR)/usr/share/$(PACKAGE)-common/scripts
 	cp -r scripts/storage $(DESTDIR)/usr/share/$(PACKAGE)-common/scripts
@@ -111,10 +79,6 @@ override_dh_auto_install:
 	cp -r python/lib/cloud* $(DESTDIR)/usr/share/pyshared
 
 	# cloudstack-usage
-	mkdir $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/usage
-	mkdir $(DESTDIR)/var/log/$(PACKAGE)/usage
-	mkdir $(DESTDIR)/usr/share/$(PACKAGE)-usage
-	mkdir $(DESTDIR)/usr/share/$(PACKAGE)-usage/plugins
 	install -D usage/target/cloud-usage-$(VERSION).jar $(DESTDIR)/usr/share/$(PACKAGE)-usage/lib/$(PACKAGE)-usage.jar
 	install -D usage/target/dependencies/* $(DESTDIR)/usr/share/$(PACKAGE)-usage/lib/
 	cp usage/target/transformed/db.properties $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)/usage/
