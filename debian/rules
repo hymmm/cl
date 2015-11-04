@@ -18,10 +18,6 @@ override_dh_auto_build:
 	    -Dmaven.repo.local=$(HOME)/.m2/repository
 	     ${ACS_BUILD_OPTS}
 
-override_dh_auto_clean:
-	dh_auto_clean
-	rm -f replace.properties.tmp
-
 override_dh_auto_install:
 	# Common packages
 	mkdir -p $(DESTDIR)/$(SYSCONFDIR)/$(PACKAGE)
